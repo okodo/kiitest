@@ -1,0 +1,12 @@
+div.collapse.navbar-collapse.pull-right
+  ul.nav.navbar-nav
+    li
+      a(href="#/home") Home
+    li(ng-hide="signedIn()")
+      a(href="#/login") Log In
+    li(ng-hide="signedIn()")
+      a(href="#/register") Register
+    li(ng-show="signedIn()")
+      a(ng-click="showUserModal()") {{ user.fullname || user.email }}
+    li(ng-show="signedIn()")
+      a(ng-click="logout()") Log Out

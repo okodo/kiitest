@@ -18,12 +18,14 @@ gem 'angular_rails_csrf'
 gem 'devise'
 gem 'devise-i18n'
 gem 'devise-async'
+gem 'email_validator'
 
 gem 'rails-i18n'
 gem 'jc-validates_timeliness'
 gem 'ffaker'
 gem 'unicorn'
 gem 'highline'
+gem 'active_model_serializers'
 
 gem 'sidekiq'
 gem 'sidekiq-status'
@@ -57,7 +59,7 @@ end
 group :test do
   gem 'webmock', require: false
   gem 'simplecov', require: false
-  gem 'shoulda-matchers', '~> 3.0.1', require: false
+  gem 'shoulda'
   gem 'rspec-rails'
   gem 'capybara'
   gem 'capybara-ng'

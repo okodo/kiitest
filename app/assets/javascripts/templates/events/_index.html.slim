@@ -1,0 +1,64 @@
+h1.page-header
+  .row
+    .col-md-6
+      = "Flatevent"
+    .col-md-6
+      button.btn.btn-primary.pull-right(ng-click="showForm()" title="Add new event")
+        = "Create new event"
+    .clearfix
+h2.text-center
+  '{{calendarDay | date}}
+.row
+  .col-md-4
+    .btn-group
+      button.btn.btn-default(mwl-date-modifier date="calendarDay" set-to-today ) Today
+      button.btn.btn-primary(mwl-date-modifier date="calendarDay" decrement="calendarView" ) <
+      button.btn.btn-primary(mwl-date-modifier date="calendarDay" increment="calendarView" ) >
+  .col-md-4(style="text-align:center;")
+    .btn-group
+      button.btn.btn-primary(ng-click="changeCalendarView('week')" ng-class="{active: calendarView=='week'}") Week
+      button.btn.btn-primary(ng-click="changeCalendarView('month')" ng-class="{active: calendarView=='month'}") Month
+      button.btn.btn-primary(ng-click="changeCalendarView('year')" ng-class="{active: calendarView=='year'}") Year
+  .col-md-4
+    .btn-group.pull-right
+      button.btn.btn-primary(ng-click="showAll()" title="Show all events" ng-class="{active: viewMode=='all'}") All events
+      button.btn.btn-primary(ng-click="showMy()" title="Show only my events" ng-class="{active: viewMode=='my'}") My events
+
+mwl-calendar(
+  view="calendarView"
+  current-day="calendarDay"
+  events="events"
+  view-title="calendarTitle"
+  on-event-click="eventClicked(calendarEvent)"
+  on-event-times-changed="calendarEvent.starts_at = calendarNewEventStart; calendarEvent.endsAt = calendarNewEventEnd"
+  edit-event-html="'<i class=\'glyphicon glyphicon-pencil\'></i>'"
+  delete-event-html="'<i class=\'glyphicon glyphicon-remove\'></i>'"
+  on-edit-event-click="eventEdited(calendarEvent)"
+  on-delete-event-click="eventDeleted(calendarEvent)"
+  auto-open="true")
+
+br
+
+table.table.table-bordered(ng-show="events.length")
+  thead
+    - %w(Title Date RecursOn Creator Controls).each do |attribute|
+      td
+        = attribute
+  tbody
+    tr(ng-repeat="event in events | orderBy: 'startsAt'")
+      td
+        a(href="#/events/{{event.id}}") {{event.title}}
+      td
+        '{{event.starts_at | date:'dd.MM.yyyy HH:mm'}}
+      td
+        '{{event.recurs_on}}
+      td
+        '{{event.user.fullname || event.user.email}}
+      td(style="width: 100px;")
+        .btn-group
+          button.btn.btn-sm.btn-primary(ng-click="eventEdited(event)" ng-show="event.editable")
+            span.glyphicon.glyphicon-pencil
+          button.btn.btn-sm.btn-danger(ng-click="eventDeleted(event)" ng-show="event.deletable")
+            span.glyphicon.glyphicon-trash
+
+

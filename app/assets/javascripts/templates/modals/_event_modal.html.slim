@@ -1,0 +1,22 @@
+.modal-header
+  h3 
+    '{{ event.length ? 'Update event data' : 'Add new event' }}
+form(name="form.eventForm" ng-submit="addEvent()" novalidate)
+  .modal-body
+    .form-group
+      label Title
+      span.required-asterix *
+      input.form-control(type="text" placeholder="Title" ng-model="title" name="title" required)
+      p(ng-show="form.eventForm.title.$invalid && !form.eventForm.title.$pristine" class="help-block") Title is required
+    .form-group
+      label Event recursion
+      span.required-asterix *
+      select.form-control(ng-model="recurs_on" ng-options="type.value as type.name for type in types" required)
+        option(value="") Please, select type
+    .form-group
+      label Event date
+      span.required-asterix *
+      input.form-control(date-time type="datetime" placeholder="Start date" ng-model="starts_at" name="starts_at" format='dd.MM.yyyy HH:mm' required)
+  .modal-footer
+    button.btn.btn-primary(type="submit" ng-disabled="form.eventForm.$invalid") OK
+    button.btn.btn-warning(type="button" ng-click="cancel()") Cancel

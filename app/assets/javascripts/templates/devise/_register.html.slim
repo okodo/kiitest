@@ -1,0 +1,30 @@
+.page-header
+  h1 Register
+.row
+  .col-md-6.col-md-offset-3
+    form#sign-up-form(name="form.registrationForm" ng-submit="register()" autocomplete="off" novalidate)
+      .alert.alert-danger(role="alert" ng-show='loginErrors')
+        span.glyphicon.glyphicon-exclamation-sign
+        ul
+          li (ng-show="loginErrors.email.length")  Email is already taken
+          li (ng-show="loginErrors.password_confirmation.length")  Confirmation does not match password
+          li (ng-show="loginErrors.password.length")  Password is invalid
+      .form-group
+        label Full name
+        input.form-control(type="text" placeholder="Full name" ng-model="user.fullname")
+      .form-group
+        label Email
+        span.required-asterix *
+        input.form-control(type="email" placeholder="Email" ng-model="user.email" name="email" required)
+        input(type="text" style="display:none")
+        p(ng-show="form.registrationForm.email.$invalid && !form.registrationForm.email.$pristine" class="help-block") Email is required
+      .form-group
+        label Password
+        span.required-asterix *
+        input.form-control(type="password" placeholder="Password" autocomplete="off" ng-model="user.password" name="password" ng-minlength="8" required)
+        p(ng-show="form.registrationForm.password.$invalid && !form.registrationForm.password.$pristine" class="help-block") Password is required and should be at least 8 characters
+      .form-group
+        label Password confirmation
+        span.required-asterix *
+        input.form-control(type="password" placeholder="Password confirmation" ng-model="user.password_confirmation" name="password_confirmation" ng-minlength="8" ng-required="!form.userForm.password.$pristine")
+      input.btn.btn-primary.pull-right(type="submit" value="Sign up" ng-disabled="form.registrationForm.$invalid")

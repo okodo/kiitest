@@ -1,0 +1,24 @@
+.modal-header
+  h3 Change account settings
+form(name="form.userForm" ng-submit="updateUser()" autocomplete="off" novalidate)
+  .modal-body
+    .form-group
+      label Full name
+      input.form-control(type="text" ng-model="fullname" name="fullname" required)
+    .form-group
+      label Email
+      span.required-asterix *
+      input.form-control(type="email" ng-model="email" name="email" required)
+      p(ng-show="form.userForm.email.$invalid && !form.userForm.email.$pristine" class="help-block") Email is required
+      input(type="text" style="display:none")
+    .form-group
+      label Password
+      span.required-asterix *
+      input.form-control(type="password" autocomplete="off" ng-model="password" name="password" ng-minlength="8")
+    .form-group
+      label Password Confirmation
+      span.required-asterix *
+      input.form-control(type="password" ng-model="password_confirmation" name="password_confirmation" ng-required="!form.userForm.password.$pristine" ng-minlength="8")
+  .modal-footer
+    button.btn.btn-primary(type="submit" ng-disabled="form.userForm.$invalid") OK
+    button.btn.btn-warning(type="button" ng-click="cancel()") Cancel

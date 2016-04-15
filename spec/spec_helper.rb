@@ -4,7 +4,7 @@ require 'vcr'
 
 SimpleCov.minimum_coverage 95
 SimpleCov.start 'rails' do
-  # add_filter 'app/models/remote/eks'
+  add_filter 'app/controllers/application_controller.rb'
 end
 
 VCR.configure do |c|

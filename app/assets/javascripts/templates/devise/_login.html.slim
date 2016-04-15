@@ -1,0 +1,17 @@
+.page-header
+  h1 Sign In
+.row
+  .col-md-6.col-md-offset-3
+    form#sign-in-form(ng-submit="login()" autocomplete="off")
+      .alert.alert-danger(role="alert" ng-show='loginErrors')
+        span.glyphicon.glyphicon-exclamation-sign
+        span  Log in credentials are invalid
+      .form-group
+        label Email
+        span.required-asterix *
+        input.form-control(type="email" placeholder="Email" ng-model="user.email")
+      .form-group
+        label Password
+        span.required-asterix *
+        input.form-control(type="password" autocomplete="off" placeholder="Password" ng-model="user.password")
+      input.btn.btn-primary.pull-right(type="submit" value="Sign in")
